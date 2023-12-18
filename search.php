@@ -1,9 +1,33 @@
+<?php
+
+if(isset($_GET["category"])){
+    $key = $_GET["category"];
+    $type = "category";  
+}else
+if(isset($_GET["chara"])){
+    $key = $_GET["chara"]; 
+    $type = "chara"; 
+}else
+if(isset($_GET["series"])){
+    $key = $_GET["series"]; 
+    $type = "series";
+}else
+if(isset($_GET["brand"])){
+    $key = $_GET["brand"]; 
+    $type = "brand";  
+}else{
+    header("Location : index.php");
+}
+require 'function.php';
+$category = query("SELECT * FROM product WHERE $type = '$key'");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Search</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/6f63cd3ddc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +41,7 @@
             <div class="nav">
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a class="active" href="shop.html">Shop</a></li>
+                    <li><a href="shop.html">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -28,8 +52,33 @@
                 <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
-        </section>        
-        
+        </section>
+        <section class="index-product1" id="section-p">
+            <h2>All Items</h2>
+            <div class="pro-container"> 
+                <?php $i = 1;?>
+                <?php foreach ($category as $pro) : ?>
+                <div class="pro">
+                    <a href="product.php?id=<?= $pro["id"]?>">
+                    <img src="img/products/<?= $pro["img"] ?>" alt="">
+                    <div class="des">
+                        <span><?= $pro["brand"] ?></span>
+                        <h5><?= $pro["name"] ?> - <?= $pro["series"]?></h5>
+                        <div class="star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Rp.<?= $pro["price"]?></h4>
+                    </div>
+                    <a href="#"><i id="cart" class="fa-solid fa-cart-shopping cart"></i></a>
+                    </a>
+                </div>
+                <?php $i++?>
+                <?php endforeach;?>
+            </div>
         <section>
             <footer id="section-p">
                 <div class="Col">
@@ -81,6 +130,5 @@
             </footer>
         </section>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
