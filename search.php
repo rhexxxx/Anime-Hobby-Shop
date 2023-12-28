@@ -1,25 +1,8 @@
 <?php
-
-if(isset($_GET["category"])){
-    $key = $_GET["category"];
-    $type = "category";  
-}else
-if(isset($_GET["chara"])){
-    $key = $_GET["chara"]; 
-    $type = "chara"; 
-}else
-if(isset($_GET["series"])){
-    $key = $_GET["series"]; 
-    $type = "series";
-}else
-if(isset($_GET["brand"])){
-    $key = $_GET["brand"]; 
-    $type = "brand";  
-}else{
-    header("Location : index.php");
-}
 require 'function.php';
-$category = query("SELECT * FROM product WHERE $type = '$key'");
+$key = $_GET["search"];
+if(isset($_GET["search"])){
+    $category = search($_GET["search"]);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +10,7 @@ $category = query("SELECT * FROM product WHERE $type = '$key'");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Search for "<?= $key ?>"</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/6f63cd3ddc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,13 +18,20 @@ $category = query("SELECT * FROM product WHERE $type = '$key'");
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-category">
+    <div class="main-body">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.php">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -54,7 +44,7 @@ $category = query("SELECT * FROM product WHERE $type = '$key'");
             </div>
         </section>
         <section class="index-product1" id="section-p">
-            <h2>All Items</h2>
+            <h2>All Items for "<?= $key ?>"</h2>
             <div class="pro-container"> 
                 <?php $i = 1;?>
                 <?php foreach ($category as $pro) : ?>
@@ -79,6 +69,19 @@ $category = query("SELECT * FROM product WHERE $type = '$key'");
                 <?php $i++?>
                 <?php endforeach;?>
             </div>
+        </section>
+        <?php if (empty($category)) {?>
+        <section class="no-result" id="section-p">
+                    <div class="search-empty">
+                        <div class="empty-image">
+                            <img src="img/no-result.png" alt="">
+                        </div>
+                        <div class="empty-text">
+                             <h1>We Couldn't Find What You Need</h1>
+                        </div>
+                    </div>
+        </section>
+        <?php }}?>
         <section>
             <footer id="section-p">
                 <div class="Col">

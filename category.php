@@ -1,6 +1,9 @@
 <?php 
 $Cat = $_GET["category"];
 require 'function.php';
+if ($Cat == 'Newest') {
+    $category = query("SELECT * FROM product WHERE popularity = '$Cat' ORDER BY id DESC");
+}
 $category = query("SELECT * FROM product WHERE popularity = '$Cat'")
 ?>
 
@@ -20,10 +23,17 @@ $category = query("SELECT * FROM product WHERE popularity = '$Cat'")
     <div class="main-category">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.php">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -61,6 +71,7 @@ $category = query("SELECT * FROM product WHERE popularity = '$Cat'")
                 <?php $i++?>
                 <?php endforeach;?>
             </div>
+        </section>
         <section>
             <footer id="section-p">
                 <div class="Col">

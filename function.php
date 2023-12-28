@@ -10,4 +10,15 @@ function query($query){
     }
     return $rows;
 }
+
+function search($search){
+    $query = "SELECT * FROM product WHERE
+        id LIKE '%$search%' OR
+        brand LIKE '%$search%' OR
+        series LIKE '%$search%' OR
+        category LIKE '%$search%' OR
+        chara LIKE '%$search%'
+    ";
+    return query($query);
+}
 ?>

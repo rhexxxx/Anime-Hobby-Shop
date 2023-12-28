@@ -1,3 +1,8 @@
+<?php 
+require 'function.php';
+$product = query("SELECT * FROM product ORDER BY id DESC")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +16,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-category">
+    <div class="main-body">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a class="active" href="shop.html">Shop</a></li>
+                    <li><a class="active" href="shop.php">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -29,7 +41,40 @@
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
         </section>        
-        
+        <section class="Shop-section" id="section-m">
+            <div class="shop-banner">
+                <h2>Exclusive Anime Figure, Merchandise, And Many More</h2>
+            </div>
+            <div class="shop-items" id="section-p">
+                <div class="shop-title">
+                    <h2>all of our items</h2>
+                </div>
+                <div class="pro-container"> 
+                    <?php $i = 1;?>
+                    <?php foreach ($product as $pro) : ?>
+                    <div class="pro">
+                        <a href="product.php?id=<?= $pro["id"]?>">
+                            <img src="img/products/<?= $pro["img"] ?>" alt="">
+                            <div class="des">
+                                <span><?= $pro["brand"] ?></span>
+                                <h5><?= $pro["name"] ?> - <?= $pro["series"]?></h5>
+                                    <div class="star">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h4>Rp.<?= $pro["price"]?></h4>
+                            </div>
+                            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+                        </a>
+                        
+                    </div>
+                    <?php endforeach;?>
+                </div>  
+            </div>
+        </section>
         <section>
             <footer id="section-p">
                 <div class="Col">

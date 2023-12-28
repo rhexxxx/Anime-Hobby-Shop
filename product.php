@@ -18,13 +18,20 @@ $product = query("SELECT * FROM product WHERE id = $id");
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-product">
+    <div class="main-body">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.php">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -58,10 +65,10 @@ $product = query("SELECT * FROM product WHERE id = $id");
                     </div>
                     <div class="product-info">
                         <ul>
-                            <li><a href="search.php?chara=<?= $pro["chara"]?>"><?= $pro["chara"];?></a></li>
-                            <li><a href="search.php?series=<?= $pro["series"]?>"><?= $pro["series"];?></a></li>
-                            <li><a href="search.php?category=<?= $pro["category"]?>"><?= $pro["category"];?></a></li>
-                            <li><a href="search.php?brand=<?= $pro["brand"]?>"><?= $pro["brand"];?></a></li>
+                            <li><a href="search.php?search=<?= $pro["chara"]?>"><?= $pro["chara"];?></a></li>
+                            <li><a href="search.php?search=<?= $pro["series"]?>"><?= $pro["series"];?></a></li>
+                            <li><a href="search.php?search=<?= $pro["category"]?>"><?= $pro["category"];?></a></li>
+                            <li><a href="search.php?search=<?= $pro["brand"]?>"><?= $pro["brand"];?></a></li>
                         </ul>
                     </div>
                 </div>

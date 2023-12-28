@@ -8,7 +8,7 @@ $product = query("SELECT * FROM product");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | </title>
+    <title>Home | Animeku</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/6f63cd3ddc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,13 +16,20 @@ $product = query("SELECT * FROM product");
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-index">
+    <div class="main-body">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
                     <li><a class="active" href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.php">Shop</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
@@ -39,41 +46,53 @@ $product = query("SELECT * FROM product");
             <h2>Super Value Deals</h2>
             <h1>On All Products</h1>
             <p>Save more with cuppons & up to 70% off!</p>
-            <button>Shop now</button>
+            <form action="shop.php"><button>Shop now</button></form>
         </section>
-        <section class="features" id="section-p">
-            <h2>Categories</h2>
+        <section class="features" >
+            <h2 id="section-p">Categories</h2>
             <div class="index-feature" >
-                <div class="fe-box">
-                    <img src="img/features/nendroid.png" alt="">
-                    <h6>Nendroid</h6>
-                </div>
+                <a href="search.php?category=nendroid">
+                    <div class="fe-box">
+                        <img src="img/features/nendroid.png" alt="">
+                        <h6>Nendroid</h6>
+                    </div>
+                </a>
+                <a href="search.php?category=figure">
                 <div class="fe-box">
                     <img src="img/features/scale_figures.png" alt="">
                     <h6>Scale Figures</h6>
                 </div>
-                <div class="fe-box">
-                    <img src="img/features/figma.png" alt="">
-                    <h6>Figma</h6>
-                </div>
-                <div class="fe-box">
-                    <img src="img/features/merchandise.png" alt="">
-                    <h6>Mercandise</h6>
-                </div>
-                <div class="fe-box">
-                    <img src="img/features/model_kit.png" alt="">
-                    <h6>Model Kit</h6>
-                </div>
-                <div class="fe-box">
-                    <img src="img/features/plush.png" alt="">
-                    <h6>Plush</h6>
-                </div>
+                </a>
+                <a href="search.php?category=figma">
+                    <div class="fe-box">
+                        <img src="img/features/figma.png" alt="">
+                        <h6>Figma</h6>
+                    </div>
+                </a>
+                <a href="search.php?category=merchandise">
+                    <div class="fe-box">
+                        <img src="img/features/merchandise.png" alt="">
+                        <h6>Mercandise</h6>
+                    </div>
+                </a>
+                <a href="search.php?category=model kit">
+                    <div class="fe-box">
+                        <img src="img/features/model_kit.png" alt="">
+                        <h6>Model Kit</h6>
+                    </div>
+                </a>
+                <a href="search.php?category=plush">
+                    <div class="fe-box">
+                        <img src="img/features/plush.png" alt="">
+                        <h6>Plush</h6>
+                    </div>
+                </a>
             </div>
         </section>
         <section class="index-product1" id="section-p">
-        <div class="product-tittle">
+            <div class="product-tittle">
                 <h2>Top Item </h2>
-                <a href="category.php?category=Newest">See More -></a>
+                <a href="category.php?category=Top">See More -></a>
             </div>
             <div class="pro-container"> 
                 <?php $i = 1;?>
@@ -83,8 +102,7 @@ $product = query("SELECT * FROM product");
                         <img src="img/products/<?= $pro["img"] ?>" alt="">
                         <div class="des">
                             <span><?= $pro["brand"] ?></span>
-                            <h5><?= $pro["name"] ?> - <?= $pro["series"]?></h5>
-                            <div class="pro-status">
+                            <h5><?= $pro["name"] ?> - <?= $pro["series"]?>..</h5>
                                 <div class="star">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -93,9 +111,6 @@ $product = query("SELECT * FROM product");
                                     <i class="fas fa-star"></i>
                                 </div>
                                 <h4>Rp.<?= $pro["price"]?></h4>
-                                
-                            </div> 
-                            
                         </div>
                         <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
                     </a>
@@ -106,14 +121,12 @@ $product = query("SELECT * FROM product");
                     }?>
                 <?php $i++?>
                 <?php endforeach;?>
-                </div>
-            </div>
-            
+            </div>    
         </section>
         <section class="index-banner" id="section-m1">
             <h4>Repair Service</h4>
             <h2>Up To <span>70% Off</span>  - All Anime Figures & Accessories</h2>
-            <button class="normal">Explore More</button>
+            <button class="normal" id="explore-button">Explore More</button>
         </section>
         <section class="index-product1" id="section-p">
             <div class="product-tittle">
@@ -148,34 +161,6 @@ $product = query("SELECT * FROM product");
                 <?php endforeach;?>
             </div>
         </section>
-        <section class="sm-banner" id="section-p">
-            <div class="banner-box">
-                <h4>Crazy Deals</h4>
-                <h2>Buy 1 Get 1 Free</h2>
-                <span>The best Classic dress is on sale at cara</span>
-                <button class="white">learn More</button>
-            </div>
-            <div class="banner-box banner-box2">
-                <h4>Spring/Summer</h4>
-                <h2>Upomming Season</h2>
-                <span>The best Classic dress is on sale at cara</span>
-                <button class="white">Collection</button>
-            </div>
-        </section>
-        <section class="banner3">
-            <div class="banner-box">
-                <h2>SEASONAL SALE</h2>
-                <h3>Winter Collection -50% Off</h3>
-            </div>
-            <div class="banner-box banner-box2">
-                <h2>NEW FOOTWEAR COLLECTION</h2>
-                <h3>Spring/Summer 2022</h3>
-            </div>
-            <div class="banner-box banner-box3">
-                <h2>T-SHIRTS</h2>
-                <h3>New Trendy Prints</h3>
-            </div>
-        </section>
         <section id="newsletter" class="section-p"> 
             <div class="newstext">
                 <h4>Sign Up For newsletter</h4>
@@ -191,8 +176,8 @@ $product = query("SELECT * FROM product");
                 <div class="Col">
                     <img class="logo" src="img/logo.png" alt="">
                     <h4>Contact</h4>
-                    <p><strong>Address:</strong> 562 Wellington Road, Street 32, San Fransisco</p>
-                    <p><strong>Phone:</strong> +01 2222 365/ (+91) 01 2345 6789</p>
+                    <p><strong>Address:</strong> Jalan Gunung Payung No.46, Jimbaran</p>
+                    <p><strong>Phone:</strong> +62 823 2727 8434/ (+62) 08 2327 8434</p>
                     <p><strong>Hours:</strong> 10.00 - 18.00, Mon - Sat</p>
                     <div class="social">
                         <h4>Follow Us</h4>
