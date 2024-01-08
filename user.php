@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contact</title>
+    <title>Home | Animeku</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/6f63cd3ddc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,31 +11,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-category">
+    <div class="main-body">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
-                    <li><a href="index.php">Home</a></li>
+                    <li><a class="active" href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a class="active" href="contact.html">Contact</a></li>
-                    <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.php" id="lg-bag" class="bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <?php if(!isset($_SESSION["login"])){?>
+                    <?= "<a href='login.php' class='login-button'>Login</a>"; ?>
+                    <?php } else{;?>
+                    <a href="user.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
+                    <?php }?>
                     <a href="" id="close"><i class="fa-solid fa-x"></i></a>
                 </ul>
             </div>
             <div class="mobile">
-                <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
-        </section>        
+        </section>
+        <section class="user-data">
+            <div class="">
+
+            </div>
+        </section>
+        <a href="logout.php" class="login-button">logout</a>
+
         <section>
             <footer id="section-p">
                 <div class="Col">
                     <img class="logo" src="img/logo.png" alt="">
                     <h4>Contact</h4>
-                    <p><strong>Address:</strong> 562 Wellington Road, Street 32, San Fransisco</p>
-                    <p><strong>Phone:</strong> +01 2222 365/ (+91) 01 2345 6789</p>
+                    <p><strong>Address:</strong> Jalan Gunung Payung No.46, Jimbaran</p>
+                    <p><strong>Phone:</strong> +62 823 2727 8434/ (+62) 08 2327 8434</p>
                     <p><strong>Hours:</strong> 10.00 - 18.00, Mon - Sat</p>
                     <div class="social">
                         <h4>Follow Us</h4>
@@ -58,7 +76,7 @@
                 </div>
                 <div class="col">
                     <h4>My Account</h4>
-                    <a href="">Sign In</a>
+                    <a href="login.php">Sign In</a>
                     <a href="">View Cart</a>
                     <a href="">My Wishlist</a>
                     <a href="">Track My Order</a>

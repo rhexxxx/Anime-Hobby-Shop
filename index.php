@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require 'function.php';
 $product = query("SELECT * FROM product");
 ?> 
@@ -30,14 +31,18 @@ $product = query("SELECT * FROM product");
                 <ul id="navbar">
                     <li><a class="active" href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="cart.php" id="lg-bag" class="bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <?php if(!isset($_SESSION["login"])){?>
+                    <?= "<a href='login.php' class='login-button'>Login</a>"; ?>
+                    <?php } else{;?>
+                    <a href="user.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
+                    <?php }?>
                     <a href="" id="close"><i class="fa-solid fa-x"></i></a>
                 </ul>
             </div>
             <div class="mobile">
-                <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
         </section>
@@ -50,44 +55,46 @@ $product = query("SELECT * FROM product");
         </section>
         <section class="features" >
             <h2 id="section-p">Categories</h2>
-            <div class="index-feature" >
-                <a href="search.php?category=nendroid">
+            <div class="features-container">
+                <div class="index-feature" >
+                    <a href="search.php?search=nendroid">
+                        <div class="fe-box">
+                            <img src="img/features/nendroid.png" alt="">
+                            <h6>Nendroid</h6>
+                        </div>
+                    </a>
+                    <a href="search.php?search=figure">
                     <div class="fe-box">
-                        <img src="img/features/nendroid.png" alt="">
-                        <h6>Nendroid</h6>
+                        <img src="img/features/scale_figures.png" alt="">
+                        <h6>Scale Figures</h6>
                     </div>
-                </a>
-                <a href="search.php?category=figure">
-                <div class="fe-box">
-                    <img src="img/features/scale_figures.png" alt="">
-                    <h6>Scale Figures</h6>
+                    </a>
+                    <a href="search.php?search=figma">
+                        <div class="fe-box">
+                            <img src="img/features/figma.png" alt="">
+                            <h6>Figma</h6>
+                        </div>
+                    </a>
+                    <a href="search.php?search=merchandise">
+                        <div class="fe-box">
+                            <img src="img/features/merchandise.png" alt="">
+                            <h6>Mercandise</h6>
+                        </div>
+                    </a>
+                    <a href="search.php?search=model kit">
+                        <div class="fe-box">
+                            <img src="img/features/model_kit.png" alt="">
+                            <h6>Model Kit</h6>
+                        </div>
+                    </a>
+                    <a href="search.php?search=plush">
+                        <div class="fe-box">
+                            <img src="img/features/plush.png" alt="">
+                            <h6>Plush</h6>
+                        </div>
+                    </a>
                 </div>
-                </a>
-                <a href="search.php?category=figma">
-                    <div class="fe-box">
-                        <img src="img/features/figma.png" alt="">
-                        <h6>Figma</h6>
-                    </div>
-                </a>
-                <a href="search.php?category=merchandise">
-                    <div class="fe-box">
-                        <img src="img/features/merchandise.png" alt="">
-                        <h6>Mercandise</h6>
-                    </div>
-                </a>
-                <a href="search.php?category=model kit">
-                    <div class="fe-box">
-                        <img src="img/features/model_kit.png" alt="">
-                        <h6>Model Kit</h6>
-                    </div>
-                </a>
-                <a href="search.php?category=plush">
-                    <div class="fe-box">
-                        <img src="img/features/plush.png" alt="">
-                        <h6>Plush</h6>
-                    </div>
-                </a>
-            </div>
+            </div>          
         </section>
         <section class="index-product1" id="section-p">
             <div class="product-tittle">
@@ -110,7 +117,7 @@ $product = query("SELECT * FROM product");
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4>Rp.<?= $pro["price"]?></h4>
+                                <h4>Rp.<?= number_format($pro["price"],"0",",",".");?></h4>
                         </div>
                         <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
                     </a>
@@ -150,7 +157,7 @@ $product = query("SELECT * FROM product");
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <h4>Rp.<?= $pro["price"]?></h4>
+                        <h4>Rp.<?= number_format($pro["price"],"0",",",".");?></h4>
                     </div>
                     <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
                     </a>
@@ -167,8 +174,7 @@ $product = query("SELECT * FROM product");
                 <p>Get Email Updates about our latest shop and <span>special offers.</span></p>
             </div>
             <div class="newsform">
-                <input type="text" placeholder="your email address">
-                <button class="normal">sign up</button>
+                    <input type="text" name="username" placeholder="your username"><button class="normal" name="submit">sign up</button>
             </div>
         </section>
         <section>
@@ -200,7 +206,7 @@ $product = query("SELECT * FROM product");
                 </div>
                 <div class="col">
                     <h4>My Account</h4>
-                    <a href="">Sign In</a>
+                    <a href="login.php">Sign In</a>
                     <a href="">View Cart</a>
                     <a href="">My Wishlist</a>
                     <a href="">Track My Order</a>

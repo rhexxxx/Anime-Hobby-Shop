@@ -30,9 +30,13 @@ $product = query("SELECT * FROM product ORDER BY id DESC")
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
                     <li><a class="active" href="shop.php">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="cart.php" id="lg-bag" class="bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <?php if(!isset($_SESSION["login"])){?>
+                    <?= "<a href='login.php' class='login-button'>Login</a>"; ?>
+                    <?php } else{;?>
+                    <a href="user.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
+                    <?php }?>
                     <a href="" id="close"><i class="fa-solid fa-x"></i></a>
                 </ul>
             </div>
@@ -40,7 +44,7 @@ $product = query("SELECT * FROM product ORDER BY id DESC")
                 <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
-        </section>        
+        </section>      
         <section class="Shop-section" id="section-m">
             <div class="shop-banner">
                 <h2>Exclusive Anime Figure, Merchandise, And Many More</h2>
@@ -65,7 +69,7 @@ $product = query("SELECT * FROM product ORDER BY id DESC")
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <h4>Rp.<?= $pro["price"]?></h4>
+                                    <h4>Rp.<?= number_format($pro["price"],"0",",",".");?></h4>
                             </div>
                             <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
                         </a>
@@ -80,8 +84,8 @@ $product = query("SELECT * FROM product ORDER BY id DESC")
                 <div class="Col">
                     <img class="logo" src="img/logo.png" alt="">
                     <h4>Contact</h4>
-                    <p><strong>Address:</strong> 562 Wellington Road, Street 32, San Fransisco</p>
-                    <p><strong>Phone:</strong> +01 2222 365/ (+91) 01 2345 6789</p>
+                    <p><strong>Address:</strong> Jalan Gunung Payung No.46, Jimbaran</p>
+                    <p><strong>Phone:</strong> +62 823 2727 8434/ (+62) 08 2327 8434</p>
                     <p><strong>Hours:</strong> 10.00 - 18.00, Mon - Sat</p>
                     <div class="social">
                         <h4>Follow Us</h4>
@@ -104,7 +108,7 @@ $product = query("SELECT * FROM product ORDER BY id DESC")
                 </div>
                 <div class="col">
                     <h4>My Account</h4>
-                    <a href="">Sign In</a>
+                    <a href="login.php">Sign In</a>
                     <a href="">View Cart</a>
                     <a href="">My Wishlist</a>
                     <a href="">Track My Order</a>

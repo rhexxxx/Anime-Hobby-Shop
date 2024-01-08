@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>contact</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/6f63cd3ddc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,16 +11,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-body">
+    <div class="main-category">
         <section id="header">
             <a href="index.php"><img src="img/logo.png" class="logo" alt=""></a>
+            <div class="search">
+                <div class="input">
+                    <form action="search.php" method="get"> 
+                        <input type="text" name="search" id="src" placeholder="search" autocomplete="off"><button type="submit" name="kirim" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="nav">
                 <ul id="navbar">
-                    <li><a href="index.php">Home</a></li>
+                    <li><a class="active" href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
-                    <li><a class="active" href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="cart.html" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="cart.php" id="lg-bag" class="bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <?php if(!isset($_SESSION["login"])){?>
+                    <?= "<a href='login.php' class='login-button'>Login</a>"; ?>
+                    <?php } else{;?>
+                    <a href="user.php" class="user-icon"><i class="fa-solid fa-user"></i></a>
+                    <?php }?>
                     <a href="" id="close"><i class="fa-solid fa-x"></i></a>
                 </ul>
             </div>
@@ -28,8 +39,7 @@
                 <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
                 <i id="bar" class="fas fa-outdent"></i>
             </div>
-        </section>
-
+        </section>      
         <section>
             <footer id="section-p">
                 <div class="Col">
